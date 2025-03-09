@@ -1,0 +1,48 @@
+{
+    "education": [
+        {
+            "title": "Kurser i Matematik",
+            "school": "Uppsala Universitet",
+            "year": "2020-2022",
+            "details": "Tillämpad matematik (5 hp), markovprocesser (10 hp), tidsserieanalys (10 hp), statistisk maskininlärning (5 hp), objektorienterad programmering i Java (10 hp)"
+        },
+        {
+            "title": "Kandidatexamen i Matematik",
+            "school": "Örebro Universitet",
+            "year": "2017-2020",
+            "details": "Examensarbete: Perturbations of symmetric matrix polynomials and their linearization"
+        },
+        {
+            "title": "Naturvetenskapsprogrammet",
+            "school": "Peder Skrivares Gymnasieskola",
+            "year": "2013-2016",
+            "details": ""
+        }
+    ],
+    "experience": [
+        {
+            "title": "Lärare grund senare obeh",
+            "company": "Varbergs kommun, Almers",
+            "year": "2023-2024",
+            "details": "NO och matematik lärare årskurs 7, anställd från 19-06-2023 till 19-06-2024"
+        },
+        {
+            "title": "Lärare grund senare obeh",
+            "company": "Varbergs kommun, Ankarskolan",
+            "year": "2022-2023",
+            "details": "NO lärare årskurs 7 och 9, anställd från 01-12-2022 till 19-06-2023"
+        },
+        {
+            "title": "Butikssäljare",
+            "company": "Björkäng Vägkrog OKQ8",
+            "year": "2018-2025",
+            "details": "Sälja och fylla på varor, personlig service, mottagning av varor"
+        },
+        {
+            "title": "Amanuens",
+            "company": "Örebro Universitet",
+            "year": "2018-2020",
+            "details": "Föreläsningar och studiestöd för studenter inom matematik kurser"
+        }
+    ]
+}
