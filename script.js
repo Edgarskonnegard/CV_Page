@@ -6,18 +6,62 @@ function toggleMenu() {
     menu.classList.toggle("open");
     icon.classList.toggle("open");
 }
+/* Carousel */
+const container = document.querySelector(".carousel-container");
+const slides = document.querySelectorAll(".slide");
+const nextSlide = document.getElementById("carousel-button");
 
+let index = 0;
+
+function updateCarousel() {
+    container.style.transform = `translateX(-${index * 100}%)`;
+}
+
+nextSlide.addEventListener("click", () => {
+    index = (index + 1) % slides.length;
+    updateCarousel();
+});
+
+/*
+// Automatisk karusell
+setInterval(() => {
+    index = (index < slides.length - 1) ? index + 1 : 0;
+    updateCarousel();
+}, 3000);
+*/
 async function togglePopup() {
     const popup = document.querySelector(".popup-container");
     const img = document.querySelector(".image-container");
-    
+    popup.style.display = 'flex';
+    img.style.display = 'flex';
     popup.classList.toggle("open");
     img.classList.toggle("open");
     if(!cvData){
         await loadCVData();
     }
+    if(!popup.classList.contains("open")){
+        popup.addEventListener('transitionend', function handler() {
+            popup.style.display = 'none';
+            popup.removeEventListener('transitionend', handler);
+        }, { once: true });
+
+    }
+    else{
+        popup.style.display = 'flex';
+    }
+    if(img.classList.contains("open")){
+        img.addEventListener('transitionend', function handler() {
+            img.style.display = 'none';
+            img.removeEventListener('transitionend', handler);
+        }, { once: true });
+
+    }
+    else{
+        img.style.display = 'flex';
+    }
     
 }
+
 
 async function loadCVData() {
     try{
@@ -98,3 +142,6 @@ function closeModal() {
 function openDemo() {
     window.open("https://github.com/Edgarskonnegard/LabbHTML.git", "_blank");
 }
+window.onload = (event) => {
+    loadCVData();
+};

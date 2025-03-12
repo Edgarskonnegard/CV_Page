@@ -9,8 +9,8 @@
         height: 80vh;
     }
     .image-container {
-        width: 30vh;
-        height: 30vh;
+        width: 20rem;
+        height: 20rem;
     }
     .about-background {
         flex-direction: column;
@@ -20,5 +20,15 @@
     }
     .contact-info {
         flex-direction: column;
+        align-items: flex-start;
+    }
+    #education h2, #cv-experience h2 {
+        font-size: 1.0rem;
+    }
+    #education h3, #cv-experience h3 {
+        font-size: 0.8rem;
+    }
+    #education p, #cv-experience p {
+        font-size: 0.6rem;
     }
 }

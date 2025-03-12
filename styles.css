@@ -154,12 +154,40 @@ a:hover {
     margin-top: 8rem;
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+    justify-content: center;
+    align-items: center;
     gap: 4rem;
 }
+.carousel {
+    position: relative;
+    overflow: hidden;
+    width: 40rem;
+}
+
+.carousel-container {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    display: flex;
+    min-width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile-text {
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -181,8 +209,9 @@ a:hover {
 .button-container button{
     border-radius: 15px;
     color: black;
+    border: 1px solid rgb(0, 0, 0);
     padding: 5px 15px 5px 15px;
-    background: linear-gradient(90deg,rgb(253, 253, 255) 5%, rgb(255, 255, 255) 100%);
+    background: white;
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
@@ -205,39 +234,29 @@ a:hover {
 }
 .image-container.open {
     opacity: 0;
-    transform: translateX(-100%);
-    -webkit-transform: translateX(-100%);
-    -moz-transform: translateX(-100%);
-    -ms-transform: translateX(-100%);
-    -o-transform: translateX(-100%);
-    transition: transform 1.5s ease, opacity 1.5s ease;
-    -webkit-transition: transform 1.5s ease, opacity 1.5s ease;
-    -moz-transition: transform 1.5s ease, opacity 1.5s ease;
-    -ms-transition: transform 1.5s ease, opacity 1.5s ease;
-    -o-transition: transform 1.5s ease, opacity 1.5s ease;
+    transform: translateX(-10rem);
+    -webkit-transform: translateX(-10rem);
+    -moz-transform: translateX(-10rem);
+    -ms-transform: translateX(-10rem);
+    -o-transform: translateX(-10rem);
+    transition: transform 1.3s ease, opacity 1.3s ease;
+    -webkit-transition: transform 1.3s ease, opacity 1.3s ease;
+    -moz-transition: transform 1.3s ease, opacity 1.3s ease;
+    -ms-transition: transform 1.3s ease, opacity 1.3s ease;
+    -o-transition: transform 1.3s ease, opacity 1.3s ease;
 }
 .image-container {
     opacity: 1;
-    transform: translateX(0);
-    transition: transform 1.5s ease, opacity 0.5s ease;
-    -webkit-transition: transform 1.5s ease, opacity 0.5s ease;
-    -moz-transition: transform 1.5s ease, opacity 0.5s ease;
-    -ms-transition: transform 1.5s ease, opacity 0.5s ease;
-    -o-transition: transform 1.5s ease, opacity 0.5s ease;
-    border-radius: 50%;
+    border-radius: 10rem;
+    width: 40rem;
+    height: 40rem;
     background-image: url("edgar.JPG");
     background-size: 280%;
     background-position: 30% 8%;
-    width:72vh;
-    height:72vh;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    -webkit-transform: translateX(0);
-    -moz-transform: translateX(0);
-    -ms-transform: translateX(0);
-    -o-transform: translateX(0);
+    -webkit-border-radius: 40rem;
+    -moz-border-radius: 10rem;
+    -ms-border-radius: 10rem;
+    -o-border-radius: 10rem;
 }
 
 .socials-container {
@@ -254,31 +273,8 @@ a:hover {
 /*CV-POPUP*/
 /*----------------------------------------------------------*/
 .popup-container {
-    opacity: 0;
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-    -moz-transform: translateX(100%);
-    -ms-transform: translateX(100%);
-    -o-transform: translateX(100%);
-    transition: transform 1.5s ease, opacity 0.5s ease;
-    -webkit-transition: transform 1.5s ease, opacity 0.5s ease;
-    -moz-transition: transform 1.5s ease, opacity 0.5s ease;
-    -ms-transition: transform 1.5s ease, opacity 0.5s ease;
-    -o-transition: transform 1.5s ease, opacity 0.5s ease;
-}
-.popup-container.open {
-    transform: translateX(-120%);
-    transition: transform 1.5s ease, opacity 2.5s ease;
-    -webkit-transition: transform 1.5s ease, opacity 2.5s ease;
-    -moz-transition: transform 1.5s ease, opacity 2.5s ease;
-    -ms-transition: transform 1.5s ease, opacity 2.5s ease;
-    -o-transition: transform 1.5s ease, opacity 2.5s ease;
     opacity: 1;
     border: 1px solid gray;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
     gap: 1rem;
     padding: 30px 30px 30px 30px;
     border-radius: 20px;
@@ -286,11 +282,8 @@ a:hover {
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
-    -webkit-transform: translateX(-120%);
-    -moz-transform: translateX(-120%);
-    -ms-transform: translateX(-120%);
-    -o-transform: translateX(-120%);
 }
+
 .list-container {
     display: flex;
     flex-direction: column;
@@ -301,7 +294,7 @@ a:hover {
 
 .list-container h3{
     margin: 0;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
 }
 .list-container ul{
     padding-bottom: 0;
@@ -312,16 +305,16 @@ a:hover {
     margin: 0;
 }
 #education h2, #cv-experience h2 {
-    font-size: 1rem;
+    font-size: 1.6rem;
     margin: 0;
 }
 #education h3, #cv-experience h3 {
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: rgb(85, 85, 85);
     margin: 0;
 }
 #education p, #cv-experience p {
-    font-size: 0.6rem;
+    font-size: 1.0rem;
     color: rgb(112, 112, 112);
     margin: 0;
 }
@@ -578,7 +571,8 @@ a:hover {
 .project-buttons button {
     width: 8rem;
     background: white;
-    border-color: rgb(0, 0, 0);
+    border: 1px solid rgb(0, 0, 0);
+    color: black;
     padding: 15px 15px 15px 15px;
     border-radius: 20px;
     -webkit-border-radius: 30px;
@@ -617,8 +611,8 @@ a:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-start;
     gap: 4rem;
     border: 1px solid gray;
     border-radius: 20px;
