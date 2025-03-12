@@ -413,7 +413,7 @@ a:hover {
     font-size: 0.9rem;
 }
 .about-text-content {
-    width: 95%;
+    width: 90%;
 }
 
 /*--------------------------------*/
@@ -445,7 +445,7 @@ a:hover {
 .experience-container {
     border: 1px solid grey;
     border-radius: 20px;
-    padding: 30px 60px 30px 60px;
+    max-width: 70vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -454,6 +454,8 @@ a:hover {
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+    padding: 30px 60px 30px 60px;
+    
 }
 
 .experience-container h3{

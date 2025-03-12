@@ -15,4 +15,7 @@
     .about-background {
         flex-direction: column;
     }
+    .exp-outer-container {
+        flex-direction: column;
+    }
 }
