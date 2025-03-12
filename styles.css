@@ -3,7 +3,7 @@
     padding: 0;
 }
 body {
-    gap: 5rem;
+    gap: 10rem;
 }
 /*-------------------------------------------------------------------------*/
 /* NAVIGATION */
@@ -343,9 +343,10 @@ a:hover {
 }
 .about-details-container {
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 3rem;
 }
 
@@ -363,16 +364,19 @@ a:hover {
     -o-border-radius: 24px;
 }
 .about-text-container {
+    max-width: 75vh;
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
 }
 .about-background {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
 }
 .about-card {
@@ -402,7 +406,6 @@ a:hover {
 }
 
 .about-text {
-    border: 1px solid black;
     display: flex;
     position: relative;
     align-items: center;
@@ -410,8 +413,7 @@ a:hover {
     font-size: 0.9rem;
 }
 .about-text-content {
-    border: 1px solid blue;
-    width: 80%;
+    width: 95%;
 }
 
 /*--------------------------------*/
