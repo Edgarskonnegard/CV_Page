@@ -8,4 +8,8 @@
     #about {
         height: 80vh;
     }
+    .image-container {
+        width: 30vh;
+        height: 30vh;
+    }
 }
