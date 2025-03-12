@@ -468,6 +468,7 @@ a:hover {
 .exp-outer-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
     gap: 6rem;
