@@ -365,11 +365,14 @@ a:hover {
 .about-text-container {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
 }
 .about-background {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 1rem;
 }
 .about-card {
@@ -399,12 +402,16 @@ a:hover {
 }
 
 .about-text {
-    width: 73vh;
-    position: relative;
+    border: 1px solid black;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    position: relative;
+    align-items: center;
+    justify-content: center;
     font-size: 0.9rem;
+}
+.about-text-content {
+    border: 1px solid blue;
+    width: 80%;
 }
 
 /*--------------------------------*/

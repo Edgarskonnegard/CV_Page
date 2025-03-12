@@ -12,4 +12,9 @@
         width: 30vh;
         height: 30vh;
     }
+    .about-background {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
