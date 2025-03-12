@@ -226,7 +226,7 @@ a:hover {
     -ms-transition: transform 1.5s ease, opacity 0.5s ease;
     -o-transition: transform 1.5s ease, opacity 0.5s ease;
     border-radius: 50%;
-    background-image: url("..//Assets/edgar.JPG");
+    background-image: url("edgar.JPG");
     background-size: 280%;
     background-position: 30% 8%;
     width:72vh;
@@ -357,7 +357,7 @@ a:hover {
     height: 40vh;
     background-size: 250%;
     background-position: 45% 40%;
-    background-image: url(..//Assets/edgar_sv.jpg);
+    background-image: url("edgar_sv.jpg");
     -webkit-border-radius: 24px;
     -moz-border-radius: 24px;
     -ms-border-radius: 24px;

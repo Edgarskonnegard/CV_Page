@@ -21,7 +21,7 @@ async function togglePopup() {
 
 async function loadCVData() {
     try{
-        const response = await fetch('..//JSON/cv.json');
+        const response = await fetch('cv.json');
         if(response.ok){
             const cvData = await response.json();
             const educationList = document.querySelector("#education");
