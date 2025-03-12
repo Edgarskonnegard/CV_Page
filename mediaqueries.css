@@ -18,4 +18,7 @@
     .exp-outer-container {
         flex-direction: column;
     }
+    .contact-info {
+        flex-direction: column;
+    }
 }
