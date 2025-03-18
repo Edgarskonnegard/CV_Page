@@ -1,3 +1,58 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        //loop: true,
+        slidesPerView: 3,
+        spaceBetween: 20,
+        centeredSlides: true,
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        loop: true,
+        freeMode: true,
+        mousewheel: true,
+        touchEventsTarget: 'container', // Gör att touch funkar på hela Swiper
+        simulateTouch: true, // Simulerar touch för enhetlighet
+        grabCursor: true,
+        on: {
+            // Körs när den aktiva sliden ändras
+            slideChange: function () {
+                // Återställ alla slides till standard
+                this.slides.forEach((slide) => {
+                    slide.style.transition = 'transform 0.5s ease-in-out';
+                    slide.style.transform = 'scale(1)';
+                    slide.style.opacity = '1';
+                });
+                // Skala upp den aktiva sliden
+                const activeSlide = this.slides[this.activeIndex];
+                activeSlide.style.transition = 'transform 0.5s ease-in-out';
+                activeSlide.style.transform = 'scale(1.1)';
+                activeSlide.style.opacity = '1';
+            },
+            // Körs vid initialisering för att sätta första aktiva slide
+            init: function () {
+                const activeSlide = this.slides[this.activeIndex];
+                activeSlide.style.transition = 'transform 0.5s ease-in-out';
+                activeSlide.style.transform = 'scale(1.1)';
+                activeSlide.style.opacity = '1';
+            }
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+        // And if we need scrollbar
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+});
+
+
+
 let cvData = null;
 
 function toggleMenu() {
@@ -6,29 +61,8 @@ function toggleMenu() {
     menu.classList.toggle("open");
     icon.classList.toggle("open");
 }
-/* Carousel */
-const container = document.querySelector(".carousel-container");
-const slides = document.querySelectorAll(".slide");
-const nextSlide = document.getElementById("carousel-button");
 
-let index = 0;
 
-function updateCarousel() {
-    container.style.transform = `translateX(-${index * 100}%)`;
-}
-
-nextSlide.addEventListener("click", () => {
-    index = (index + 1) % slides.length;
-    updateCarousel();
-});
-
-/*
-// Automatisk karusell
-setInterval(() => {
-    index = (index < slides.length - 1) ? index + 1 : 0;
-    updateCarousel();
-}, 3000);
-*/
 async function togglePopup() {
     const popup = document.querySelector(".popup-container");
     const img = document.querySelector(".image-container");
@@ -144,4 +178,5 @@ function openDemo() {
 }
 window.onload = (event) => {
     loadCVData();
+    updateScrollCarousel();
 };

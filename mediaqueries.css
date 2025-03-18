@@ -32,3 +32,13 @@
         font-size: 0.6rem;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .image-container {
+        width: 15rem;
+        height: 15rem;
+    }
+    .list-container h3{
+        font-size: 2.0rem;
+    }
+}

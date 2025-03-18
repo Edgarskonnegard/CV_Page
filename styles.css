@@ -508,6 +508,7 @@ a:hover {
 /*-----------------------------------------------*/
 /*projects*/
 /*------------------------------------------------*/
+
 #projects {
     margin-top: 15rem;
     display: flex;
@@ -522,15 +523,23 @@ a:hover {
     font-size: 2.7rem;
 }
 
-.project-details-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin: 2vh;
+.project-slider {
+    width: 90%;
+    height: 60vh;
+}
+.swiper {
+    height: 70vh;
+    .swiper-wrapper {
+        width: 45vh;
+        padding: 60px 60px 30px 30px;
+        .swiper-slide {
+            font-size: 2rem;
+            display: flex;
+            justify-content: center;
 
+        }
+        
+    }
 }
 
 .project-container {
@@ -545,6 +554,7 @@ a:hover {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    height: 50vh;
 }
 
 .project-container img{
