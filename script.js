@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper('.swiper', {
         // Optional parameters
         //loop: true,
-        slidesPerView: 3,
-        spaceBetween: 20,
+        slidesPerView: "auto",
+        spaceBetween: 0,
         centeredSlides: true,
         // If we need pagination
         pagination: {
@@ -15,29 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
         touchEventsTarget: 'container', // Gör att touch funkar på hela Swiper
         simulateTouch: true, // Simulerar touch för enhetlighet
         grabCursor: true,
-        on: {
-            // Körs när den aktiva sliden ändras
-            slideChange: function () {
-                // Återställ alla slides till standard
-                this.slides.forEach((slide) => {
-                    slide.style.transition = 'transform 0.5s ease-in-out';
-                    slide.style.transform = 'scale(1)';
-                    slide.style.opacity = '1';
-                });
-                // Skala upp den aktiva sliden
-                const activeSlide = this.slides[this.activeIndex];
-                activeSlide.style.transition = 'transform 0.5s ease-in-out';
-                activeSlide.style.transform = 'scale(1.1)';
-                activeSlide.style.opacity = '1';
-            },
-            // Körs vid initialisering för att sätta första aktiva slide
-            init: function () {
-                const activeSlide = this.slides[this.activeIndex];
-                activeSlide.style.transition = 'transform 0.5s ease-in-out';
-                activeSlide.style.transform = 'scale(1.1)';
-                activeSlide.style.opacity = '1';
-            }
-        },
+        
         // Navigation arrows
         navigation: {
           nextEl: '.swiper-button-next',
@@ -62,7 +40,7 @@ function toggleMenu() {
     icon.classList.toggle("open");
 }
 
-
+/*
 async function togglePopup() {
     const popup = document.querySelector(".popup-container");
     const img = document.querySelector(".image-container");
@@ -96,10 +74,10 @@ async function togglePopup() {
     
 }
 
-
+*/
 async function loadCVData() {
     try{
-        const response = await fetch('/cv.json');
+        const response = await fetch('./cv.json');
         if(response.ok){
             const cvData = await response.json();
             const educationList = document.querySelector("#education");
@@ -161,7 +139,19 @@ document.addEventListener("keydown", function(event){
         keySequence = "";
     }
 });
-
+const cvModal = document.getElementById("cv-modal");
+const cvButton = document.getElementById("cv-button");
+cvButton.addEventListener('click', showCVModal);
+function showCVModal() {
+    if(!cvData){
+        loadCVData();
+    }
+    cvModal.classList.remove("hidden");
+    console.log("click")
+}
+function closeCVModal() {
+    cvModal.classList.add("hidden");
+}
 function showModal() {
     const modal = document.getElementById("easter-egg-modal");
     modal.classList.remove("hidden");
@@ -180,3 +170,83 @@ window.onload = (event) => {
     loadCVData();
     updateScrollCarousel();
 };
+
+const username = "Edgarskonnegard";
+const swiperWrapper = document.querySelector(".swiper-wrapper");
+swiperWrapper.innerHTML = `<div class="loading-spinner"></div>`;
+async function fetchGitHubRepos() {
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        if (!response.ok) {
+            throw new Error("Kunde inte hämta repositories");
+        }
+        const repos = await response.json();     
+        swiperWrapper.innerHTML = repos.map(repo => `
+            <div class="swiper-slide">
+                <div class="project-container">
+                    <img src="vbg.jpg">
+                    <h3>${repo.name}</h3>
+                    <p> ${repo.description} </p>
+                </div>
+            </div>
+        `).join("");
+        initSwiper();
+    } catch (error) {
+        console.error(error);
+        swiperWrapper.innerHTML = `<div class="swiper-slide"> <p>Kunde inte ladda projekt.</p> </div>`;
+    }
+}
+fetchGitHubRepos();
+
+function initSwiper() {
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+        //loop: true,
+        slidesPerView: "auto",
+        centeredSlides: true,
+        slideToClickedSlide: true,
+        // If we need pagination
+        pagination: {
+          el: '.swiper-pagination',
+        },
+        loop: true,
+        freeMode: true,
+        mousewheel: true,
+        touchEventsTarget: 'container', // Gör att touch funkar på hela Swiper
+        simulateTouch: true, // Simulerar touch för enhetlighet
+        grabCursor: true,
+        // Navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      
+        // And if we need scrollbar
+        scrollbar: {
+          el: '.swiper-scrollbar',
+        },
+      });
+}
+
+swiper.on('slideChangeTransitionEnd', function () {
+    console.log('Slide change triggered');
+    // Hämta alla slides
+    const slides = document.querySelectorAll('.swiper-slide');
+    const swiperWrapper = swiper.wrapperEl;
+    const viewportCenter = window.innerWidth / 2; // Mitten av skärmen
+  
+    slides.forEach((slide, index) => {
+      const slideRect = slide.getBoundingClientRect();
+      const slideCenter = slideRect.left + slideRect.width / 2;
+  
+      // Kolla vilken slide som är närmast mitten av skärmen
+      if (Math.abs(slideCenter - viewportCenter) < slideRect.width / 2) {
+        // Ta bort aktiv-klass från alla slides
+        slides.forEach(s => s.classList.remove('swiper-slide-active'));
+        // Sätt aktiv-klass på den mittersta sliden
+        slide.classList.add('swiper-slide-active');
+        // Optional: Uppdatera Swipers interna activeIndex
+        swiper.activeIndex = index;
+      }
+    });
+  });
