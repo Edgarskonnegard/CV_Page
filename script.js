@@ -195,7 +195,7 @@ function initSwiper() {
     const swiper = new Swiper('.swiper', {
         // Optional parameters
         //loop: true,
-        slidesPerView: "auto",
+        slidesPerView: "3",
         centeredSlides: true,
         slideToClickedSlide: true,
         // If we need pagination
@@ -203,7 +203,7 @@ function initSwiper() {
           el: '.swiper-pagination',
         },
         loop: true,
-        freeMode: true,
+        freeMode: false,
         mousewheel: true,
         touchEventsTarget: 'container', // Gör att touch funkar på hela Swiper
         simulateTouch: true, // Simulerar touch för enhetlighet
