@@ -234,13 +234,12 @@ function initSwiper() {
 async function updateSlideInfo(activeSlide) {
     const token = "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";
     const slideInfo = document.querySelector('.slide-info');
-    const section = document.getElementById('projects');
     if (activeSlide) {
         const name = activeSlide.dataset.name;
         const description = activeSlide.dataset.description;
         const backgroundIMG = activeSlide.dataset.backgroundIMG;
         const hasPage = activeSlide.dataset.hasPage === "true";
-        section.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
+        slideInfo.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
         if(hasPage){
             slideInfo.innerHTML = `
                 <h3>${name}</h3>

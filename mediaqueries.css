@@ -33,7 +33,7 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
     .image-container {
         width: 12rem;
         height: 12rem;
