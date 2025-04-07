@@ -237,9 +237,9 @@ async function updateSlideInfo(activeSlide) {
     if (activeSlide) {
         const name = activeSlide.dataset.name;
         const description = activeSlide.dataset.description;
-        const backgroundIMG = activeSlide.dataset.backgroundIMG;
+        //const backgroundIMG = activeSlide.dataset.backgroundIMG;
         const hasPage = activeSlide.dataset.hasPage === "true";
-        slideInfo.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
+        //slideInfo.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
         if(hasPage){
             slideInfo.innerHTML = `
                 <h3>${name}</h3>
