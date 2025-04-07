@@ -581,6 +581,7 @@ a:hover {
 }
 .slide-info p {
     font-size: 1rem;
+    height: 10rem;
 }
 .slide-buttons {
     display: flex;
