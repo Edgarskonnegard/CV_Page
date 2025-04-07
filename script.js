@@ -142,48 +142,47 @@ const swiperWrapper = document.querySelector(".swiper-wrapper");
 swiperWrapper.innerHTML = `<div class="loading-spinner"></div>`;
 async function fetchGitHubRepos() {
     try {
-        const token = "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"; // Ersätt med ditt token
-        const query = `
-            query {
-                user(login: "${username}") {
-                    repositories(first: 100, privacy: PUBLIC) {
-                        nodes {
-                            name
-                            description
-                            openGraphImageUrl
-                        }
-                    }
-                }
-            }
-        `;
+        const [reposResponse, projectsResponse] = await Promise.all([
+            fetch(`https://api.github.com/users/${username}/repos`),
+            fetch('./myRepos.json')
+        ]);
 
-        const response = await fetch("https://api.github.com/graphql", {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ query }),
-        });
-
-        if (!response.ok) {
-            throw new Error("Kunde inte hämta repositories");
+        if (!reposResponse.ok || !projectsResponse.ok) {
+            throw new Error("Kunde inte hämta data");
         }
 
-        const data = await response.json();
-        const repos = data.data.user.repositories.nodes;
-        console.log(repos); 
-        swiperWrapper.innerHTML = repos.map(repo => `
+        const allRepos = await reposResponse.json();
+        const { repos: projects } = await projectsResponse.json(); // din JSON-struktur
+
+        const projectNames = projects.map(p => p.name);
+        const filteredRepos = allRepos.filter(repo => projectNames.includes(repo.name));
+
+        // Matcha ihop varje repo med extra info från din json
+        const finalRepos = filteredRepos.map(repo => {
+            const extra = projects.find(p => p.name === repo.name);
+            return {
+                ...repo,
+                iconIMG: extra.iconIMG,
+                backgroundIMG: extra.backgroundIMG,
+                hasPage: extra.hasPage
+            };
+        });
+
+        console.log("Matchade projekt:", finalRepos);
+
+        swiperWrapper.innerHTML = finalRepos.map(repo => `
             <div class="swiper-slide" 
-            data-name="${repo.name}" 
-            data-description="${repo.description || 'Ingen beskrivning'}" 
-            data-img="${`https://raw.githubusercontent.com/${username}/${repo.name}/main/backgroundIMG.png`}"
+                data-name="${repo.name}" 
+                data-description="${repo.description || 'Ingen beskrivning'}" 
+                data-img="${repo.backgroundIMG || 'vbg.jpg'}"
+                data-has-page="${repo.hasPage}"
             >
                 <div class="project-container">
-                    <img src="${repo.openGraphImageUrl ? repo.openGraphImageUrl : 'vbg.jpg'}">
+                    <img src="${repo.iconIMG || 'vbg.jpg'}" alt="${repo.name}">
                 </div>
             </div>
         `).join("");
+
         initSwiper();
     } catch (error) {
         console.error(error);
@@ -240,14 +239,15 @@ async function updateSlideInfo(activeSlide) {
         const name = activeSlide.dataset.name;
         const description = activeSlide.dataset.description;
         const backgroundIMG = activeSlide.dataset.backgroundIMG;
-        const pagesUrl = await checkGitHubPages(username, name, token);        section.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
-        if(pagesUrl){
+        const hasPage = activeSlide.dataset.hasPage === "true";
+        section.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
+        if(hasPage){
             slideInfo.innerHTML = `
                 <h3>${name}</h3>
                 <p>${description}</p>
                 <div class="slide-buttons">
                     <button id="slide-gh-button" class="gh-button">
-                    <a href="${pagesUrl}"> gh pages </a></button>
+                    <a href="https://${username}.github.io/${name}/"> gh pages </a></button>
                     <button id="slide-button">
                     <a href="https://github.com/${username}/${name}"> view repo </a></button>
                 </div
@@ -273,6 +273,7 @@ async function updateSlideInfo(activeSlide) {
     }
 }
 
+/*
 async function checkGitHubPages(username, repoName, token) {
     const response = await fetch(`https://api.github.com/repos/${username}/${repoName}/pages`, {
         headers: {
@@ -286,27 +287,4 @@ async function checkGitHubPages(username, repoName, token) {
     }
     return null; // Null om Pages inte är aktiverat
 }
-/*
-swiper.on('slideChangeTransitionEnd', function () {
-    console.log('Slide change triggered');
-    // Hämta alla slides
-    const slides = document.querySelectorAll('.swiper-slide');
-    const swiperWrapper = swiper.wrapperEl;
-    const viewportCenter = window.innerWidth / 2; // Mitten av skärmen
-  
-    slides.forEach((slide, index) => {
-      const slideRect = slide.getBoundingClientRect();
-      const slideCenter = slideRect.left + slideRect.width / 2;
-  
-      // Kolla vilken slide som är närmast mitten av skärmen
-      if (Math.abs(slideCenter - viewportCenter) < slideRect.width / 2) {
-        // Ta bort aktiv-klass från alla slides
-        slides.forEach(s => s.classList.remove('swiper-slide-active'));
-        // Sätt aktiv-klass på den mittersta sliden
-        slide.classList.add('swiper-slide-active');
-        // Optional: Uppdatera Swipers interna activeIndex
-        swiper.activeIndex = index;
-      }
-    });
-  });
-  */
+    */

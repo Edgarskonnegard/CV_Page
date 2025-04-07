@@ -1,0 +1,41 @@
+{
+    "repos":[
+        {
+            "name": "taskmanager",
+            "hasPage": true,
+            "iconIMG": "/taskmanager-icon.png",
+            "backgroundIMG": "taskmanager-bg.png"
+        },
+        {
+            "name": "TheDashboard",
+            "hasPage": true,
+            "iconIMG":"/TheDashboard-icon.png",
+            "backgroundIMG":"/TheDashboard-bg.png"
+        },
+        {
+            "name": "CV_Page",
+            "hasPage": true,
+            "iconIMG":"/CV_Page.jpg",
+            "backgroundIMG":"/CV_Page-bg.png"
+        },
+        {
+            "name": "LabbHTML",
+            "hasPage": false,
+            "iconIMG":"/LabbHTML.jpg",
+            "backgroundIMG":""
+        },
+        {
+            "name": "IndiLabbSkola",
+            "hasPage": false,
+            "iconIMG":"/IndiLabbSkola-icon.jpg",
+            "backgroundIMG":""
+        },
+        {
+            "name": "IndividuelltProjektBankomaten",
+            "hasPage": false,
+            "iconIMG":"IPB-icon.png",
+            "backgroundIMG":""
+        }
+
+    ]
+}
