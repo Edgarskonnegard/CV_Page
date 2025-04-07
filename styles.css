@@ -517,20 +517,29 @@ a:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3rem;
-
 }
 
 #projects h1 {
     font-size: 2.7rem;
 }
+.projects-section {
+    margin-top: 5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    background: linear-gradient(90deg, rgb(47, 47, 47) 0%, rgb(22, 22, 22) 60%, rgb(0, 0, 0) 100%);
+
+}
 
 .project-slider {
-    width: 90%;
-    height: 60vh;
+    width: 98%;
+    height: 90vh;
 }
 .swiper {
-    height: 40vh;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -547,13 +556,61 @@ a:hover {
     }
 }
 .swiper-slide-active {
-    transform: scale(1.1);
-    -webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-    -o-transform: scale(1.1);
+    .project-container img {
+        border: 3px solid rgba(255, 255, 255, 0.88);
+        transform: scale(1.06);
+        -webkit-transform: scale(1.06);
+        -moz-transform: scale(1.06);
+        -ms-transform: scale(1.06);
+        -o-transform: scale(1.06);
+}
 }
 
+.slide-info {
+    color: white;
+    border: 1px solid white;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    left: 5rem;
+}
+.slide-info h3 {
+    font-size: 2rem;
+}
+.slide-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.slide-buttons button {
+    color: white;
+    background: black;
+    border: 1px solid white;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+}
+.slide-buttons a {
+    color: white;
+    text-decoration: none;
+}
+.slide-buttons button:hover {
+    background: rgb(105, 105, 105);
+}
+#slide-gh-button {
+    background: white;
+    border: 1px solid black;
+    color: black;
+}
+#slide-gh-button a{
+    color: black;
+}
+#slide-gh-button:hover {
+    background: rgb(186, 186, 186);
+}
 .project-container {
     padding: 30px 0px 0px 0px;
     /*    border: 1px solid rgb(92, 92, 92);
@@ -566,13 +623,15 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
-    height: 50vh;
+    height: 60vh;
 }
 
 .project-container img{
+    transition: transform 0.3s ease;
     width: 30vh;
-    height: 20vh;
+    height: 40vh;
     background-size: 280%;
     background-position: 50% 40%;
     border-radius: 10px;

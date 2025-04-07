@@ -1,3 +1,4 @@
+/*
 document.addEventListener("DOMContentLoaded", function () {
     const swiper = new Swiper('.swiper', {
         // Optional parameters
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 });
 
-
+*/
 
 let cvData = null;
 
@@ -40,41 +41,6 @@ function toggleMenu() {
     icon.classList.toggle("open");
 }
 
-/*
-async function togglePopup() {
-    const popup = document.querySelector(".popup-container");
-    const img = document.querySelector(".image-container");
-    popup.style.display = 'flex';
-    img.style.display = 'flex';
-    popup.classList.toggle("open");
-    img.classList.toggle("open");
-    if(!cvData){
-        await loadCVData();
-    }
-    if(!popup.classList.contains("open")){
-        popup.addEventListener('transitionend', function handler() {
-            popup.style.display = 'none';
-            popup.removeEventListener('transitionend', handler);
-        }, { once: true });
-
-    }
-    else{
-        popup.style.display = 'flex';
-    }
-    if(img.classList.contains("open")){
-        img.addEventListener('transitionend', function handler() {
-            img.style.display = 'none';
-            img.removeEventListener('transitionend', handler);
-        }, { once: true });
-
-    }
-    else{
-        img.style.display = 'flex';
-    }
-    
-}
-
-*/
 async function loadCVData() {
     try{
         const response = await fetch('./cv.json');
@@ -168,7 +134,7 @@ function openDemo() {
 }
 window.onload = (event) => {
     loadCVData();
-    updateScrollCarousel();
+    fetchGitHubRepos();
 };
 
 const username = "Edgarskonnegard";
@@ -176,17 +142,45 @@ const swiperWrapper = document.querySelector(".swiper-wrapper");
 swiperWrapper.innerHTML = `<div class="loading-spinner"></div>`;
 async function fetchGitHubRepos() {
     try {
-        const response = await fetch(`https://api.github.com/users/${username}/repos`);
+        const token = "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"; // Ersätt med ditt token
+        const query = `
+            query {
+                user(login: "${username}") {
+                    repositories(first: 100, privacy: PUBLIC) {
+                        nodes {
+                            name
+                            description
+                            openGraphImageUrl
+                        }
+                    }
+                }
+            }
+        `;
+
+        const response = await fetch("https://api.github.com/graphql", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query }),
+        });
+
         if (!response.ok) {
             throw new Error("Kunde inte hämta repositories");
         }
-        const repos = await response.json();     
+
+        const data = await response.json();
+        const repos = data.data.user.repositories.nodes;
+        console.log(repos); 
         swiperWrapper.innerHTML = repos.map(repo => `
-            <div class="swiper-slide">
+            <div class="swiper-slide" 
+            data-name="${repo.name}" 
+            data-description="${repo.description || 'Ingen beskrivning'}" 
+            data-img="${`https://raw.githubusercontent.com/${username}/${repo.name}/main/backgroundIMG.png`}"
+            >
                 <div class="project-container">
-                    <img src="vbg.jpg">
-                    <h3>${repo.name}</h3>
-                    <p> ${repo.description} </p>
+                    <img src="${repo.openGraphImageUrl ? repo.openGraphImageUrl : 'vbg.jpg'}">
                 </div>
             </div>
         `).join("");
@@ -196,7 +190,7 @@ async function fetchGitHubRepos() {
         swiperWrapper.innerHTML = `<div class="swiper-slide"> <p>Kunde inte ladda projekt.</p> </div>`;
     }
 }
-fetchGitHubRepos();
+
 
 function initSwiper() {
     const swiper = new Swiper('.swiper', {
@@ -220,14 +214,79 @@ function initSwiper() {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev',
         },
-      
+        on: {
+            init: function () {
+                // Försök hitta aktiv slide, ell
+                const activeSlide = this.slides[this.activeIndex]; // Använd Swipers interna activeIndex
+                updateSlideInfo(activeSlide);
+            },
+            slideChange: function () {
+                const activeSlide = this.slides[this.activeIndex];
+                updateSlideInfo(activeSlide);
+            },
+        },
         // And if we need scrollbar
         scrollbar: {
           el: '.swiper-scrollbar',
         },
-      });
+    });
 }
 
+async function updateSlideInfo(activeSlide) {
+    const token = "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";
+    const slideInfo = document.querySelector('.slide-info');
+    const section = document.getElementById('projects');
+    if (activeSlide) {
+        const name = activeSlide.dataset.name;
+        const description = activeSlide.dataset.description;
+        const backgroundIMG = activeSlide.dataset.backgroundIMG;
+        const pagesUrl = await checkGitHubPages(username, name, token);        section.style.backgroundImage = `url(${backgroundIMG || 'vbg.jpg'})`;
+        if(pagesUrl){
+            slideInfo.innerHTML = `
+                <h3>${name}</h3>
+                <p>${description}</p>
+                <div class="slide-buttons">
+                    <button id="slide-gh-button" class="gh-button">
+                    <a href="${pagesUrl}"> gh pages </a></button>
+                    <button id="slide-button">
+                    <a href="https://github.com/${username}/${name}"> view repo </a></button>
+                </div
+            `;
+        }
+        else{
+            slideInfo.innerHTML = `
+                <h3>${name}</h3>
+                <p>${description}</p>
+                <div class="slide-buttons">
+                    <button id="slide-button">
+                    <a href="https://github.com/${username}/${name}"> view repo </a></button>
+                </div
+                `;
+
+        }
+    } else {
+        console.warn("Ingen aktiv slide hittad");
+        slideInfo.innerHTML = `
+            <h3>Inget projekt valt</h3>
+            <p>Välj ett projekt i karusellen</p>
+        `;
+    }
+}
+
+async function checkGitHubPages(username, repoName, token) {
+    const response = await fetch(`https://api.github.com/repos/${username}/${repoName}/pages`, {
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Accept": "application/vnd.github+json"
+        }
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data.html_url; // Returnerar Pages-URL om den finns
+    }
+    return null; // Null om Pages inte är aktiverat
+}
+/*
 swiper.on('slideChangeTransitionEnd', function () {
     console.log('Slide change triggered');
     // Hämta alla slides
@@ -250,3 +309,4 @@ swiper.on('slideChangeTransitionEnd', function () {
       }
     });
   });
+  */
