@@ -557,6 +557,7 @@ a:hover {
 }
 .swiper-slide-active {
     .project-container img {
+        z-index: 10;
         border: 3px solid rgba(255, 255, 255, 0.88);
         transform: scale(1.06);
         -webkit-transform: scale(1.06);
