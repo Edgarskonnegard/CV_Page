@@ -573,6 +573,7 @@ a:hover {
     justify-content: space-around;
     align-items: space-around;
     color: white;
+    background: transparent;
     gap: 1rem;
     left: 5rem;
 

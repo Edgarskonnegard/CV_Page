@@ -42,13 +42,13 @@
         font-size: 1.8rem;
     }
     .project-container img {
-        width: 13vh;
-        height: 18vh;
+        width: 11vh;
+        height: 17vh;
     }
     .slide-info h3 {
         font-size: 1.8rem;
     }
     .swiper {
-        height: 40vh;
+        height: 35vh;
     }
 }
