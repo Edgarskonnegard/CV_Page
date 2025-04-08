@@ -572,7 +572,7 @@ a:hover {
     flex-direction: column;
     justify-content: space-around;
     align-items: space-around;
-    background: blue;
+    color: white;
     gap: 1rem;
     left: 5rem;
 
