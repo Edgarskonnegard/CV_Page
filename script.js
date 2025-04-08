@@ -232,7 +232,6 @@ function initSwiper() {
 }
 
 async function updateSlideInfo(activeSlide) {
-    const token = "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";
     const slideInfo = document.querySelector('.slide-info');
     if (activeSlide) {
         const name = activeSlide.dataset.name;
@@ -245,11 +244,11 @@ async function updateSlideInfo(activeSlide) {
                 <h3>${name}</h3>
                 <p>${description}</p>
                 <div class="slide-buttons">
-                    <button id="slide-gh-button" class="gh-button">
+                    <button id="slide-button">
                     <a href="https://${username}.github.io/${name}/"> gh pages </a></button>
                     <button id="slide-button">
                     <a href="https://github.com/${username}/${name}"> view repo </a></button>
-                </div
+                </div>
             `;
         }
         else{
@@ -259,7 +258,7 @@ async function updateSlideInfo(activeSlide) {
                 <div class="slide-buttons">
                     <button id="slide-button">
                     <a href="https://github.com/${username}/${name}"> view repo </a></button>
-                </div
+                </div>
                 `;
 
         }
@@ -271,19 +270,3 @@ async function updateSlideInfo(activeSlide) {
         `;
     }
 }
-
-/*
-async function checkGitHubPages(username, repoName, token) {
-    const response = await fetch(`https://api.github.com/repos/${username}/${repoName}/pages`, {
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Accept": "application/vnd.github+json"
-        }
-    });
-    if (response.ok) {
-        const data = await response.json();
-        return data.html_url; // Returnerar Pages-URL om den finns
-    }
-    return null; // Null om Pages inte är aktiverat
-}
-    */

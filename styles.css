@@ -530,6 +530,7 @@ a:hover {
     justify-content: center;
     align-items: center;
     gap: 3rem;
+    background: linear-gradient(90deg, rgb(25, 25, 25) 0%, rgb(0,0,0) 100%);
 }
 
 .project-slider {
@@ -555,23 +556,26 @@ a:hover {
 .swiper-slide-active {
     .project-container img {
         border: 3px solid rgba(255, 255, 255, 0.88);
-        transform: scale(1.5);
-        -webkit-transform: scale(1.5);
-        -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -o-transform: scale(1.5);
-    }
+        transform: scale(1.3);
+        -webkit-transform: scale(1.3);
+        -moz-transform: scale(1.3);
+        -ms-transform: scale(1.3);
+        -o-transform: scale(1.3);
+}
 }
 
 .slide-info {
     margin-top: 3rem;
-    padding-left: 2rem;
-    color: white;
+    padding-left: 3rem;
     height: 30vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: space-around;
+    background: blue;
     gap: 1rem;
     left: 5rem;
+
 }
 .slide-info h3 {
     font-size: 4rem;
