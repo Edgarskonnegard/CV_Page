@@ -135,7 +135,6 @@ function openDemo() {
 window.onload = (event) => {
     loadCVData();
     fetchGitHubRepos();
-    updateSlidesPerView();
 };
 
 const username = "Edgarskonnegard";
@@ -197,6 +196,11 @@ function initSwiper() {
         // Optional parameters
         //loop: true,
         slidesPerView: "3",
+        breakpoints: {
+            1024: { // Vid 1024px och uppåt
+                slidesPerView: 5,
+            },
+        },
         centeredSlides: true,
         slideToClickedSlide: true,
         // If we need pagination
@@ -270,19 +274,4 @@ async function updateSlideInfo(activeSlide) {
             <p>Välj ett projekt i karusellen</p>
         `;
     }
-}
-function updateSlidesPerView() {
-    const smallScreen = window.matchMedia("(max-width: 768px)"); // Mobil
-    const mediumScreen = window.matchMedia("(min-width: 769px) and (max-width: 1024px)"); // Surfplatta
-    const largeScreen = window.matchMedia("(min-width: 1025px)"); // Desktop
-
-    if (smallScreen.matches) {
-        swiper.params.slidesPerView = 3; // 1 slide för små skärmar
-    } else if (mediumScreen.matches) {
-        swiper.params.slidesPerView = 5; // 2 slides för mellanstora skärmar
-    } else if (largeScreen.matches) {
-        swiper.params.slidesPerView = 5; // 3 slides för stora skärmar
-    }
-
-    swiper.update(); // Uppdaterar Swiper med nya parametrar
 }
