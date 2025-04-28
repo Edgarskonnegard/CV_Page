@@ -197,7 +197,10 @@ function initSwiper() {
         //loop: true,
         slidesPerView: "3",
         breakpoints: {
-            1024: { // Vid 1024px och uppåt
+            1204: { // Vid 1024px och uppåt
+                slidesPerView: 4,
+            },
+            1524: { // Vid 1024px och uppåt
                 slidesPerView: 5,
             },
         },

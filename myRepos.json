@@ -35,6 +35,12 @@
             "hasPage": false,
             "iconIMG":"IPB-icon.png",
             "backgroundIMG":""
+        },
+        {
+            "name": "LektionAPI",
+            "hasPage": false,
+            "iconIMG":"LektionAPI_IMG",
+            "backgroundIMG":""
         }
 
     ]
